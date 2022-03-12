@@ -1,6 +1,8 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 export interface PeriodicElement {
   name: string;
@@ -22,6 +24,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
 ];
 
+const elementData=JSON.stringify(ELEMENT_DATA)
 /**
  * @title Table with selection
  */
@@ -35,6 +38,8 @@ export class TableSelectionExample {
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -62,8 +67,8 @@ export class TableSelectionExample {
   }
 
   display(){
-  if(this.checkboxLabel()){
-    alert(this.dataSource)
+  if(this.isAllSelected()){
+    alert(JSON.stringify(this.dataSource.data));
   }
   }
 }

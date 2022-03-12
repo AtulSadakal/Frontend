@@ -47,7 +47,9 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"
         (click)="selection.toggle(row)">
     </tr>
+    
   </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
  
 <button type="submit" mat-raised-button color="warn" (click)="display()">Submit</button>
   
